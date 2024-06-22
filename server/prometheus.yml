@@ -1,0 +1,29 @@
+global:
+  scrape_interval:     30s
+  evaluation_interval: 30s
+
+scrape_configs:
+
+  - job_name: 'Prometheus_master'
+    honor_labels: true
+    metrics_path: '/federate'
+    params:
+      'match[]':
+        - '{__name__=~".+"}'
+    static_configs:
+      # ------------------------------------- #
+      - targets: [ '192.168.0.90:9090']  # DES
+        labels:
+          pais: ES
+          entorno: DES
+          cliente: cliente1
+          hostname: cliente1
+      # ------------------------------------- #
+      - targets: [ '192.168.0.91:9090']  # des1
+        labels:
+          pais: ES
+          entorno: DES1
+          cliente: cliente2
+          hostname: cliente2
+      # ------------------------------------- #
+
